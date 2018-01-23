@@ -1,0 +1,7 @@
+library(igraph)
+pages <- read.csv(file = "nodes.csv")
+names <- data.frame(pages)
+g <- graph_from_data_frame(names, directed = T)
+plot(g)
+pg <- page_rank(g, algo = c("prpack", "arpack", "power"), vids = V(g), directed = T, damping = 0.85, personalized = NULL, weights = NULL, options = NULL)
+write.csv(file="page_rank.csv", pg$vector)
